@@ -250,19 +250,9 @@ export default class ReactGridLayout extends React.Component<Props, State> {
     const l = getLayoutItem(layout, i);
     if (!l) return;
     
-    // Create placeholder (display only)
-    const placeholder = {
-      w: l.w,
-      h: l.h,
-      x: l.x,
-      y: l.y,
-      placeholder: true,
-      i: i
-    };
     this.setState({
       oldDragItem: cloneLayoutItem(l),
-      oldLayout: layout,
-      activeDrag: placeholder
+      oldLayout: layout
     });
 
     return this.props.onDragStart(layout, l, l, null, e, node);
@@ -313,11 +303,11 @@ export default class ReactGridLayout extends React.Component<Props, State> {
     );
 
     this.props.onDrag(layout, oldDragItem, l, placeholder, e, node);
-
+    layout = allowOverlap
+      ? layout
+      : compact(layout, compactType(this.props), cols);
     this.setState({
-      layout: allowOverlap
-        ? layout
-        : compact(layout, compactType(this.props), cols),
+      layout,
       activeDrag: placeholder
     });
   };
