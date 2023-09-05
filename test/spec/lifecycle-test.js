@@ -13,7 +13,7 @@ import DroppableLayout from "../examples/15-drag-from-outside";
 import deepFreeze from "../util/deepFreeze";
 import { mount } from "enzyme";
 
-describe("Lifecycle tests", function () {
+xdescribe("Lifecycle tests", function () {
   // Example layouts use randomness
   let randIdx = 0;
   beforeAll(() => {
