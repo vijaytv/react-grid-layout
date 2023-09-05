@@ -278,15 +278,6 @@ export default class ReactGridLayout extends React.Component<Props, State> {
     const l = getLayoutItem(layout, i);
     if (!l) return;
 
-    // Create placeholder (display only)
-    const placeholder = {
-      w: l.w,
-      h: l.h,
-      x: l.x,
-      y: l.y,
-      placeholder: true,
-      i: i
-    };
 
     // Move the element to the dragged location.
     const isUserAction = true;
@@ -303,12 +294,11 @@ export default class ReactGridLayout extends React.Component<Props, State> {
     );
 
     this.props.onDrag(layout, oldDragItem, l, placeholder, e, node);
-
+    layout = allowOverlap
+      ? layout
+      : compact(layout, compactType(this.props), cols);
     this.setState({
-      layout: allowOverlap
-        ? layout
-        : compact(layout, compactType(this.props), cols),
-      activeDrag: placeholder
+      oldLayout: layout
     });
   };
 
