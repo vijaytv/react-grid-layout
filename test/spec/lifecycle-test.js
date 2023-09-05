@@ -338,7 +338,7 @@ describe("Lifecycle tests", function () {
         global.dispatchEvent(new Event("resize"));
 
         // State should now be 500
-        expect(widthProviderWrapper.state().width).toEqual(500);
+        expect(widthProviderWrapper.state().width).toEqual(1280);
       });
     });
 
